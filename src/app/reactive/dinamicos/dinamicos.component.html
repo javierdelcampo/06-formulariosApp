@@ -1,1 +1,88 @@
-<p>dinamicos works!</p>
+<h2>Reactivos: <small>Dinámicos</small></h2>
+<hr>
+
+<form (ngSubmit)="guardar()"
+      autocomplete="off"
+      [formGroup]="miFormularioDinamico">
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+
+            <input class="form-control"
+                   placeholder="Nombre de la persona"
+                   formControlName="nombrePersona">
+
+            <span class="form-text text-danger"
+                  *ngIf="campoEsValido('nombrePersona')">
+                   Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input class="form-control"
+                       placeholder="Agregar favorito"
+                       [formControl]="nuevoFavorito"
+                       (keyup.enter)="agregarFavorito()">
+                       <!--(keyup.enter)="a=1">-->
+                <button class="btn btn-outline-primary"
+                        type="button"
+                        (click)="agregarFavorito()">
+                    Agregar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9" formArrayName="favoritos">
+
+            <div class="input-group mb-1"
+                 *ngFor="let favorito of favoritosArr.controls; let i = index">
+                <input class="form-control"
+                       [formControlName]="i">
+
+                <button class="btn btn-outline-danger"
+                        type="button"
+                        (click)="borrar(i)">
+                   Borrar
+               </button>
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="submit"
+                    class="btn btn-primary float-end">
+                Guardar
+            </button>
+        </div>
+    </div>
+</form>
+
+
+<div class="row">
+    <div class="col">
+        <span>Valid</span>
+        <pre>{{ miFormularioDinamico.valid }}</pre>
+        <span>Pristine</span>
+        <pre>{{ miFormularioDinamico.pristine }}</pre>
+        <span>Touched</span>
+        <pre>{{ miFormularioDinamico.touched }}</pre>
+        <span>Value</span>
+        <pre>{{ miFormularioDinamico.value | json }}</pre>
+        <span>CustomDirective</span>
+        <pre>{{ miFormularioDinamico.controls.nombrePersona?.errors | json }}</pre>
+        <span>Agregar juego</span>
+        <pre>{{ nuevoFavorito.valid }}</pre>
+        <pre>{{ nuevoFavorito.value }}</pre>
+    </div>
+</div>
