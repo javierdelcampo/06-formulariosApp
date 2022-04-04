@@ -1,0 +1,24 @@
+<h2>Template</h2>
+<hr>
+
+<ul class="list-group">
+    <li *ngFor="let opcion of templateMenu"
+        class="list-group-item"
+        [routerLink]="[ opcion.ruta ]"
+        routerLinkActive="active">          <!-- No olvidar importar el RouterModule y shared -->
+        {{opcion.texto}}
+    </li>
+</ul>
+
+<h2 class="mt-3">Reactive</h2>
+<hr>
+
+<ul class="list-group">
+    <li *ngFor="let opcion of reactiveMenu"
+        class="list-group-item"
+        [routerLink]="[ opcion.ruta ]"
+        routerLinkActive="active">          <!-- No olvidar importar el RouterModule y shared -->
+        {{opcion.texto}}
+    </li>
+</ul>
+
